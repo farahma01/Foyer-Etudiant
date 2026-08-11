@@ -1,5 +1,7 @@
+🏠 FoyerConnect
 
-#FoyerConnect
+
+
 FoyerConnect est une application web permettant de simplifier la recherche de logement étudiant. La plateforme met en relation des étudiants avec des foyers privés proposant des chambres à louer, en facilitant la recherche, la consultation des foyers disponibles et la prise de contact.
 
 
@@ -16,7 +18,9 @@ Contacter les responsables de foyer
 Remplir un questionnaire pour affiner leur recherche
 
 
+
 ✨ Fonctionnalités
+
 
 
 🔍 Recherche de foyers par université / mot-clé
@@ -36,9 +40,13 @@ Remplir un questionnaire pour affiner leur recherche
 🗂️ Structure du projet
 
 
+
 🛠️ Technologies utilisées
 
 
+
 Front-end : HTML5, CSS3, JavaScript
+
 Back-end : PHP
+
 Base de données : MySQL (scripts SQL fournis dans sql/)
