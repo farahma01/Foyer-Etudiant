@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Page - FoyerConnect</title>
+    <link rel="stylesheet" href="../css/funpage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <nav>
+        <div class="logo">
+            <a href="index.html">
+                <img src="../images/logo 1.png" alt="FoyerConnect" style="height: 40px;">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="foyers.html">Foyers</a></li>
+            <li><a href="a-propos.html">À propos</a></li>
+            <li><a href="contact-updated.html">Contact</a></li>
+            <li><a href="espace-candidat-dynamique.html">Mon Espace</a></li>
+            <li><a href="funpage.html" style="color: #007bff; font-weight: 600; padding: 0.5rem 0; text-decoration: underline;">Fun Page 🎮</a></li>
+            <li><a href="questionnaire.html">Questionnaire ⭐</a></li>
+            <li><a href="connexion.html" class="btn-connexion">Connexion</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+<div class="game-container">
+
+    <!-- TITRE -->
+    <div class="game-hero">
+        <h1 class="game-title">🎮 Word Hunt Foyer</h1>
+        <p class="game-subtitle">Retrouvez les mots liés au logement étudiant !</p>
+        <p class="game-subtitle">Cliquez sur les lettres dans le bon ordre pour former chaque mot.</p>
+    </div>
+
+    <!-- HUD : SCORE / TROUVÉS / TIMER / TENTATIVES -->
+    <div class="hud">
+        <div class="hud-card">
+            <div class="hud-label">Score</div>
+            <div class="hud-value" id="score">0</div>
+        </div>
+        <div class="hud-card">
+            <div class="hud-label">Trouvés</div>
+            <div class="hud-value" id="found">0/6</div>
+        </div>
+        <div class="hud-card">
+            <div class="hud-label">Temps</div>
+            <div class="hud-value" id="timer" style="color: rgb(239, 71, 111);">0</div>
+        </div>
+        <div class="hud-card">
+            <div class="hud-label">Tentatives</div>
+            <div class="hud-value" id="tries">0</div>
+        </div>
+    </div>
+
+    <!--
+        STRUCTURE IMBRIQUÉE SUR 3 NIVEAUX (pour illustrer la propagation)
+        Niveau 1 : #outerDiv     → div externe
+        Niveau 2 : #gameZone     → zone de jeu
+        Niveau 3 : .letter-cell  → cellule interactive (lettre)
+    -->
+    <div class="outer" id="outerDiv">
+        <span class="level-badge level1">Niveau 1 — div externe</span>
+
+        <div class="game-zone" id="gameZone">
+            <span class="level-badge level2">Niveau 2 — zone de jeu</span>
+
+            <!-- Grille de lettres (Niveau 3) — générée dynamiquement -->
+            <div class="letter-grid" id="letterGrid"><div class="letter-cell" data-lettre="F" data-index="0">F</div><div class="letter-cell" data-lettre="E" data-index="1">E</div><div class="letter-cell" data-lettre="L" data-index="2">L</div><div class="letter-cell" data-lettre="A" data-index="3">A</div><div class="letter-cell" data-lettre="Y" data-index="4">Y</div><div class="letter-cell" data-lettre="O" data-index="5">O</div><div class="letter-cell" data-lettre="E" data-index="6">E</div><div class="letter-cell" data-lettre="O" data-index="7">O</div><div class="letter-cell" data-lettre="H" data-index="8">H</div><div class="letter-cell" data-lettre="F" data-index="9">F</div><div class="letter-cell" data-lettre="A" data-index="10">A</div><div class="letter-cell" data-lettre="R" data-index="11">R</div><div class="letter-cell" data-lettre="R" data-index="12">R</div><div class="letter-cell" data-lettre="W" data-index="13">W</div><div class="letter-cell" data-lettre="T" data-index="14">T</div><div class="letter-cell" data-lettre="E" data-index="15">E</div><div class="letter-cell" data-lettre="I" data-index="16">I</div><div class="letter-cell" data-lettre="L" data-index="17">L</div><div class="letter-cell" data-lettre="N" data-index="18">N</div><div class="letter-cell" data-lettre="E" data-index="19">E</div><div class="letter-cell" data-lettre="E" data-index="20">E</div><div class="letter-cell" data-lettre="U" data-index="21">U</div><div class="letter-cell" data-lettre="P" data-index="22">P</div><div class="letter-cell" data-lettre="S" data-index="23">S</div><div class="letter-cell" data-lettre="R" data-index="24">R</div><div class="letter-cell" data-lettre="Z" data-index="25">Z</div><div class="letter-cell" data-lettre="B" data-index="26">B</div><div class="letter-cell" data-lettre="I" data-index="27">I</div><div class="letter-cell" data-lettre="C" data-index="28">C</div><div class="letter-cell" data-lettre="D" data-index="29">D</div><div class="letter-cell" data-lettre="Y" data-index="30">Y</div><div class="letter-cell" data-lettre="O" data-index="31">O</div><div class="letter-cell" data-lettre="D" data-index="32">D</div><div class="letter-cell" data-lettre="S" data-index="33">S</div><div class="letter-cell" data-lettre="O" data-index="34">O</div><div class="letter-cell" data-lettre="T" data-index="35">T</div><div class="letter-cell" data-lettre="C" data-index="36">C</div><div class="letter-cell" data-lettre="M" data-index="37">M</div><div class="letter-cell" data-lettre="S" data-index="38">S</div><div class="letter-cell" data-lettre="R" data-index="39">R</div></div>
+
+            <!-- Mot en cours de formation -->
+            <div class="guess-area">
+                <div class="guess-display" id="guessDisplay">_ _ _</div>
+                <div class="guess-btns">
+                    <button class="btn-valider" id="btnValider">
+                        <i class="fas fa-check"></i> Valider
+                    </button>
+                    <button class="btn-effacer" id="btnEffacer">
+                        <i class="fas fa-times"></i> Effacer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENU SECONDAIRE : Liste mots + Instructions -->
+    <div class="game-footer-grid">
+
+        <div class="info-box">
+            <h3><i class="fas fa-list"></i> Mots à trouver</h3>
+            <div id="wordList"><div class="word-item" id="word-FOYER"><i class="fas fa-question-circle"></i> FOYER</div><div class="word-item" id="word-CHAMBRE"><i class="fas fa-question-circle"></i> CHAMBRE</div><div class="word-item" id="word-STUDIO"><i class="fas fa-question-circle"></i> STUDIO</div><div class="word-item" id="word-LOYER"><i class="fas fa-question-circle"></i> LOYER</div><div class="word-item" id="word-CLEF"><i class="fas fa-question-circle"></i> CLEF</div><div class="word-item" id="word-DOSSIER"><i class="fas fa-question-circle"></i> DOSSIER</div></div>
+        </div>
+
+        <div class="info-box">
+            <h3><i class="fas fa-info-circle"></i> Comment jouer</h3>
+            <ol class="how-to">
+                <li>Cliquez sur les lettres une par une</li>
+                <li>Formez un mot de la liste</li>
+                <li>Cliquez sur <strong>Valider</strong> pour vérifier</li>
+                <li>Trouvez les 6 mots avant la fin ! ⏰</li>
+                <li>Chaque mot correct = <strong>+10 points</strong> 🎉</li>
+            </ol>
+            <p style="margin-top:1rem; font-size:0.85rem; color:#666;">
+                <kbd>Entrée</kbd> = Valider &nbsp;|&nbsp; <kbd>Échap</kbd> = Effacer
+            </p>
+        </div>
+
+        <div class="info-box">
+            <h3><i class="fas fa-terminal"></i> Journal de propagation</h3>
+            <p style="font-size:0.78rem; color:#888; margin-bottom:0.8rem;">
+                Montre quel élément reçoit l'événement clic
+            </p>
+            <div id="eventLog" class="event-log-box">
+                <div class="log-entry log-info">En attente d'un clic...</div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</main>
+
+<!-- OVERLAY VICTOIRE / FIN DE TEMPS -->
+<div class="win-overlay" id="winOverlay" style="display: flex;">
+    <div class="win-box">
+        <div class="win-emoji" id="winEmoji">⏰</div>
+        <h2 id="winTitle">Temps écoulé !</h2>
+        <p id="winMsg">Vous avez trouvé 0/6 mots. Score : 0 pts.</p>
+        <button class="btn-restart" onclick="resetGame()">
+            <i class="fas fa-redo"></i> Rejouer
+        </button>
+    </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>FoyerConnect</h4>
+            <p>La plateforme qui simplifie la recherche de logement étudiant</p>
+        </div>
+        <div class="footer-section">
+            <h4>Liens rapides</h4>
+            <ul>
+                <li><a href="foyers.html">Foyers disponibles</a></li>
+                <li><a href="questionnaire.html">Questionnaire</a></li>
+                <li><a href="connexion.html">Se connecter</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Contact</h4>
+            <ul>
+                <li><i class="fas fa-envelope"></i> contact@foyerconnect.tn</li>
+                <li><i class="fas fa-phone"></i> +216 71 658 857</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 FoyerConnect. Tous droits réservés.</p>
+    </div>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+/*
+ * ============================================================
+ *  FoyerConnect - Fun Page : Jeu Word Hunt
+ *  Auteurs : Maatreg Farah et Elkhadrawi Khouloud
+ *
+ *  Concepts couverts :
+ *  a) Manipulation du DOM (createElement, appendChild, innerHTML)
+ *  b) addEventListener() pour tous les événements
+ *  c) Propagation des événements (bubbling) sur 3 niveaux imbriqués
+ *  d) event.stopPropagation() pour contrôler la propagation
+ *  e) Code entièrement commenté
+ * ============================================================
+ */
+
+/* -------------------------------------------------------
+   DONNÉES DU JEU (thème : logement étudiant)
+   ------------------------------------------------------- */
+/** Liste des mots à trouver */
+var MOTS = ["FOYER", "CHAMBRE", "STUDIO", "LOYER", "CLEF", "DOSSIER"];
+
+/**
+ * Pool de lettres de la grille (40 lettres)
+ * Contient toutes les lettres nécessaires + lettres parasites
+ */
+var LETTRES_POOL = [
+    "F","O","Y","E","R","C","H","A","M","B",
+    "R","E","S","T","U","D","I","O","L","O",
+    "Y","E","R","C","L","E","F","D","O","S",
+    "S","I","E","R","A","N","T","P","Z","W"
+];
+
+/* -------------------------------------------------------
+   ÉTAT DU JEU
+   ------------------------------------------------------- */
+var score           = 0;    // Score actuel du joueur
+var tries           = 0;    // Nombre de tentatives
+var foundWords      = [];   // Mots déjà trouvés
+var selectedLetters = [];   // Lettres sélectionnées (texte)
+var selectedCells   = [];   // Références aux éléments <div> sélectionnés
+var timerInterval   = null; // Référence au setInterval du compte à rebours
+var timeLeft        = 60;   // Secondes restantes
+var gameOver        = false;// Drapeau : partie terminée
+
+/* -------------------------------------------------------
+   a) GÉNÉRATION DYNAMIQUE DU DOM
+   ------------------------------------------------------- */
+
+/**
+ * Crée dynamiquement toutes les cellules de la grille de lettres
+ * Chaque cellule est un <div> créé avec document.createElement()
+ */
+function initGrille() {
+    var grid = document.getElementById("letterGrid");
+    grid.innerHTML = ""; // Vider la grille
+
+    // Mélanger les lettres aléatoirement (Fisher-Yates)
+    var lettres = LETTRES_POOL.slice();
+    for (var i = lettres.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = lettres[i]; 
+        lettres[i] = lettres[j]; 
+        lettres[j] = tmp;
+    }
+
+    // Créer une cellule <div> pour chaque lettre
+    lettres.forEach(function(lettre, index) {
+        var cell = document.createElement("div");    // Créer l'élément
+        cell.className = "letter-cell";              // Appliquer la classe CSS
+        cell.textContent = lettre;                   // Afficher la lettre
+        cell.dataset.lettre = lettre;                // Stocker la lettre dans data-attribute
+        cell.dataset.index  = index;                 // Stocker l'index
+
+        /*
+         * b) GESTION DES ÉVÉNEMENTS avec addEventListener()
+         *    Chaque cellule écoute l'événement "click"
+         * -------------------------------------------------
+         * c) PROPAGATION (bubbling) : sans stopPropagation,
+         *    le clic se propage : letter-cell → game-zone → outerDiv
+         */
+        cell.addEventListener("click", function(event) {
+            if (gameOver) return;
+
+            // Journaliser : l'événement est reçu par la cellule (Niveau 3)
+            logEvent("cell",
+                "🔤 [Niveau 3 — letter-cell] Clic sur la lettre « " + lettre + " »");
+
+            // Sélectionner ou désélectionner la lettre
+            gererClic(cell, lettre);
+
+            /*
+             * d) CONTRÔLE DE PROPAGATION : stopPropagation()
+             *    On empêche le clic de remonter vers game-zone et outerDiv.
+             *    Sans cette ligne, les handlers de niveau 2 et 1 se
+             *    déclencheraient aussi, causant des comportements indésirables.
+             */
+            event.stopPropagation();
+            logEvent("stop",
+                "🚫 stopPropagation() — propagation stoppée à letter-cell");
+        });
+
+        grid.appendChild(cell); // Ajouter la cellule au DOM
+    });
+}
+
+/**
+ * Crée dynamiquement la liste des mots à trouver dans le panneau
+ */
+function initWordList() {
+    var container = document.getElementById("wordList");
+    container.innerHTML = "";
+
+    MOTS.forEach(function(mot) {
+        var item = document.createElement("div");
+        item.className  = "word-item";
+        item.id         = "word-" + mot;
+        item.innerHTML  = '<i class="fas fa-question-circle"></i> ' + mot;
+        container.appendChild(item);
+    });
+}
+
+/* -------------------------------------------------------
+   LOGIQUE DU JEU
+   ------------------------------------------------------- */
+
+/**
+ * Gère la sélection / désélection d'une lettre dans la grille
+ * @param {HTMLElement} cell   - cellule cliquée
+ * @param {string}      lettre - lettre de la cellule
+ */
+function gererClic(cell, lettre) {
+    // Ignorer les cellules déjà trouvées
+    if (cell.classList.contains("found")) return;
+
+    if (cell.classList.contains("selected")) {
+        // Désélectionner la lettre
+        cell.classList.remove("selected");
+        var idx = selectedCells.indexOf(cell);
+        if (idx > -1) {
+            selectedLetters.splice(idx, 1);
+            selectedCells.splice(idx, 1);
+        }
+    } else {
+        // Sélectionner la lettre
+        cell.classList.add("selected");
+        selectedLetters.push(lettre);
+        selectedCells.push(cell);
+    }
+
+    // Mettre à jour l'affichage du mot en formation
+    majAffichageMot();
+}
+
+/**
+ * Met à jour l'affichage du mot actuellement formé
+ */
+function majAffichageMot() {
+    var display = document.getElementById("guessDisplay");
+    if (selectedLetters.length === 0) {
+        display.textContent = "_ _ _";
+    } else {
+        display.textContent = selectedLetters.join(" ");
+    }
+}
+
+/**
+ * Valide le mot formé par les lettres sélectionnées
+ * Vérifie si le mot appartient à la liste et n'a pas encore été trouvé
+ */
+function validerMot() {
+    if (gameOver || selectedLetters.length === 0) return;
+
+    tries++;
+    document.getElementById("tries").textContent = tries;
+
+    var motForma = selectedLetters.join(""); // Assembler le mot
+
+    if (MOTS.includes(motForma) && !foundWords.includes(motForma)) {
+        // ✅ MOT CORRECT
+        foundWords.push(motForma);
+        score += 10;
+
+        // Mettre à jour le HUD
+        document.getElementById("score").textContent = score;
+        document.getElementById("found").textContent = foundWords.length + "/" + MOTS.length;
+
+        // Marquer les cellules sélectionnées comme "trouvées"
+        selectedCells.forEach(function(c) {
+            c.classList.remove("selected");
+            c.classList.add("found");
+        });
+
+        // Marquer le mot dans la liste de mots
+        var wordEl = document.getElementById("word-" + motForma);
+        if (wordEl) {
+            wordEl.classList.add("found-word");
+            wordEl.innerHTML = '<i class="fas fa-check-circle"></i> ' + motForma;
+        }
+
+        logEvent("success", "✅ Mot « " + motForma + " » trouvé ! +10 pts");
+
+        // Vérifier la victoire
+        if (foundWords.length === MOTS.length) {
+            clearInterval(timerInterval);
+            gameOver = true;
+            setTimeout(function() { afficherVictoire(true); }, 500);
+        }
+
+    } else {
+        // ❌ MOT INCORRECT
+        selectedCells.forEach(function(c) {
+            c.classList.add("wrong");
+            setTimeout(function() { c.classList.remove("wrong"); }, 400);
+        });
+        logEvent("error", "❌ « " + motForma + " » : incorrect ou déjà trouvé");
+    }
+
+    effacerSelection();
+}
+
+/**
+ * Efface la sélection courante
+ */
+function effacerSelection() {
+    selectedCells.forEach(function(c) { c.classList.remove("selected"); });
+    selectedLetters = [];
+    selectedCells   = [];
+    majAffichageMot();
+}
+
+/**
+ * Affiche l'overlay de fin de jeu (victoire ou temps écoulé)
+ * @param {boolean} victoire - true si le joueur a gagné
+ */
+function afficherVictoire(victoire) {
+    var overlay = document.getElementById("winOverlay");
+    document.getElementById("winEmoji").textContent = victoire ? "🏆" : "⏰";
+    document.getElementById("winTitle").textContent = victoire ? "Bravo !" : "Temps écoulé !";
+    document.getElementById("winMsg").textContent   = victoire
+        ? "Tous les mots trouvés ! Score : " + score + " pts en " + tries + " tentatives."
+        : "Vous avez trouvé " + foundWords.length + "/" + MOTS.length + " mots. Score : " + score + " pts.";
+    overlay.style.display = "flex";
+}
+
+/**
+ * Réinitialise complètement le jeu
+ */
+function resetGame() {
+    // Réinitialiser les variables d'état
+    score = 0; tries = 0;
+    foundWords = []; selectedLetters = []; selectedCells = [];
+    timeLeft = 60; gameOver = false;
+
+    // Réinitialiser le HUD
+    document.getElementById("score").textContent  = 0;
+    document.getElementById("found").textContent  = "0/" + MOTS.length;
+    document.getElementById("tries").textContent  = 0;
+    document.getElementById("timer").textContent  = 60;
+    document.getElementById("timer").style.color  = "";
+
+    // Cacher l'overlay
+    document.getElementById("winOverlay").style.display = "none";
+
+    // Vider le journal
+    document.getElementById("eventLog").innerHTML =
+        '<div class="log-entry log-info">Nouvelle partie démarrée !</div>';
+
+    // Reconstruire la grille et la liste de mots
+    clearInterval(timerInterval);
+    initGrille();
+    initWordList();
+    majAffichageMot();
+    demarrerTimer();
+}
+
+/* -------------------------------------------------------
+   TIMER (compte à rebours)
+   ------------------------------------------------------- */
+
+/**
+ * Démarre le compte à rebours de 60 secondes
+ * Utilise setInterval pour décrémenter chaque seconde
+ */
+function demarrerTimer() {
+    timerInterval = setInterval(function() {
+        timeLeft--;
+        document.getElementById("timer").textContent = timeLeft;
+
+        // Avertissement visuel les 10 dernières secondes
+        if (timeLeft <= 10) {
+            document.getElementById("timer").style.color = "#ef476f";
+        }
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            gameOver = true;
+            effacerSelection();
+            afficherVictoire(false);
+        }
+    }, 1000);
+}
+
+/* -------------------------------------------------------
+   JOURNAL DE PROPAGATION DES ÉVÉNEMENTS
+   ------------------------------------------------------- */
+
+/**
+ * Ajoute une entrée dans le journal d'événements
+ * @param {string} type    - 'cell' | 'zone' | 'outer' | 'stop' | 'success' | 'error' | 'info'
+ * @param {string} message - texte à afficher
+ */
+function logEvent(type, message) {
+    var log   = document.getElementById("eventLog");
+    var entry = document.createElement("div");
+    entry.className = "log-entry log-" + type;
+    entry.textContent = message;
+    log.appendChild(entry);
+    log.scrollTop = log.scrollHeight;
+
+    // Limiter à 15 entrées pour éviter le débordement
+    while (log.children.length > 15) {
+        log.removeChild(log.firstChild);
+    }
+}
+
+/* -------------------------------------------------------
+   b) INITIALISATION AVEC addEventListener()
+      Tous les événements déclarés avec addEventListener
+   ------------------------------------------------------- */
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    // Initialiser le jeu au chargement
+    initGrille();
+    initWordList();
+    demarrerTimer();
+
+    /*
+     * BOUTON VALIDER
+     * d) stopPropagation() pour éviter que le clic sur le bouton
+     *    ne se propage vers game-zone puis outerDiv
+     */
+    document.getElementById("btnValider").addEventListener("click", function(event) {
+        validerMot();
+        event.stopPropagation();
+        logEvent("stop", "🚫 stopPropagation() sur bouton Valider");
+    });
+
+    /*
+     * BOUTON EFFACER
+     * Même raisonnement que Valider
+     */
+    document.getElementById("btnEffacer").addEventListener("click", function(event) {
+        effacerSelection();
+        event.stopPropagation();
+        logEvent("stop", "🚫 stopPropagation() sur bouton Effacer");
+    });
+
+    /*
+     * c) PROPAGATION — NIVEAU 2 : gameZone
+     * Ce handler se déclenche si un clic remonte depuis un enfant
+     * qui n'a PAS appelé stopPropagation (ex: clic direct sur la zone vide)
+     */
+    document.getElementById("gameZone").addEventListener("click", function(event) {
+        logEvent("zone",
+            "🎮 [Niveau 2 — game-zone] Clic reçu — propagation vers Niveau 1");
+    });
+
+    /*
+     * c) PROPAGATION — NIVEAU 1 : outerDiv
+     * Reçoit l'événement seulement si personne en dessous n'a appelé
+     * stopPropagation. Illustre la fin de la chaîne de propagation.
+     */
+    document.getElementById("outerDiv").addEventListener("click", function(event) {
+        logEvent("outer",
+            "📦 [Niveau 1 — div externe] Clic reçu — fin du bubbling");
+    });
+
+    /*
+     * RACCOURCIS CLAVIER
+     * Entrée = Valider | Échap = Effacer
+     */
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Enter")  validerMot();
+        if (event.key === "Escape") effacerSelection();
+    });
+
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - FoyerConnect</title>
+    <link rel="stylesheet" href="../css/contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== STYLES ADDITIONNELS POUR LES NOUVELLES FONCTIONNALITÉS ===== */
+
+        /* --- BANNIÈRE ANIMÉE --- */
+        .ticker-wrap {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            overflow: hidden;
+            padding: 0.6rem 0;
+            white-space: nowrap;
+        }
+
+        .ticker-inner {
+            display: inline-block;
+            animation: ticker 30s linear infinite;
+        }
+
+        .ticker-inner:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes ticker {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .ticker-text {
+            display: inline-block;
+            padding: 0 4rem;
+            font-size: 0.88rem;
+            font-weight: 500;
+        }
+
+        .ticker-text strong {
+            color: #ffd166;
+        }
+
+        #tickerHeure {
+            color: #ffd166;
+            font-weight: 700;
+        }
+
+        /* --- GALERIE D'IMAGES --- */
+        .gallery-section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+
+        .gallery-header {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .gallery-header h2 {
+            font-size: 1rem;
+            color: var(--dark);
+        }
+
+        .gallery-header i {
+            color: var(--primary);
+        }
+
+        .gallery-viewport {
+            position: relative;
+            height: 360px;
+            overflow: hidden;
+        }
+
+        .gallery-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .gallery-slide.active {
+            opacity: 1;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.65));
+            padding: 1.5rem;
+            color: var(--white);
+        }
+
+        .gallery-caption h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .gallery-caption p {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-top: 0.2rem;
+        }
+
+        .gallery-progress-bar {
+            height: 4px;
+            background: var(--gray-200);
+        }
+
+        .gallery-progress-fill {
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.1s linear;
+            width: 0%;
+        }
+
+        .gallery-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.9rem 1.5rem;
+        }
+
+        .gallery-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .gallery-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gray-300);
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .gallery-dot.active {
+            background: var(--primary);
+            transform: scale(1.3);
+        }
+
+        .gallery-arrows {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .gallery-arrow {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1.5px solid var(--gray-300);
+            background: var(--white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 0.85rem;
+            color: var(--dark);
+        }
+
+        .gallery-arrow:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* --- LIENS VERS AUTRES PAGES --- */
+        .extra-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .extra-link-card {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            color: var(--dark);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .extra-link-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .extra-link-card.card-questionnaire {
+            background: linear-gradient(135deg, #eef4ff, #d8e8ff);
+        }
+
+        .extra-link-card.card-funpage {
+            background: linear-gradient(135deg, #fff4ec, #ffe5cc);
+        }
+
+        .extra-link-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .card-questionnaire .extra-link-icon {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+        }
+
+        .card-funpage .extra-link-icon {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            color: var(--white);
+        }
+
+        .extra-link-text h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .extra-link-text p {
+            font-size: 0.82rem;
+            color: var(--gray-600);
+        }
+
+        .extra-link-arrow {
+            margin-left: auto;
+            color: var(--gray-300);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .extra-links { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== BANNIÈRE ANIMÉE ===== -->
+<div class="ticker-wrap">
+    <div class="ticker-inner" id="tickerInner">
+        <span class="ticker-text">🏠 Bienvenu au site web <strong>FoyerConnect</strong> ! &nbsp;&nbsp;|&nbsp;&nbsp; 📅 Aujourd'hui <strong id="tickerDate"></strong> &nbsp;&nbsp;|&nbsp;&nbsp; 🕐 Heure actuelle : <strong><span id="tickerHeure"></span></strong> &nbsp;&nbsp;|&nbsp;&nbsp; 🎓 Trouvez votre foyer idéal dès maintenant !</span>
+        <span class="ticker-text">🏠 Bienvenu au site web <strong>FoyerConnect</strong> ! &nbsp;&nbsp;|&nbsp;&nbsp; 📅 Aujourd'hui <strong id="tickerDate2"></strong> &nbsp;&nbsp;|&nbsp;&nbsp; 🕐 Heure actuelle : <strong><span id="tickerHeure2"></span></strong> &nbsp;&nbsp;|&nbsp;&nbsp; 🎓 Trouvez votre foyer idéal dès maintenant !</span>
+    </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <nav>
+        <div class="logo">
+            <a href="../index.html">
+                <img src="../images/logo 1.png" alt="FoyerConnect" style="height: 40px;">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="foyers.html">Foyers</a></li>
+            <li><a href="a-propos.html">À propos</a></li>
+            <li><a href="contact-updated.html" class="active">Contact</a></li>
+            <li><a href="espace-candidat-dynamique.html">Mon Espace</a></li>
+            <li><a href="funpage.html">Fun Page 🎮</a></li>
+            <li><a href="questionnaire.html">Questionnaire ⭐</a></li>
+            <li><a href="connexion.html" class="btn-connexion">Connexion</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+<div class="container">
+
+    <h1>Contactez-nous</h1>
+
+    <!-- ===== GALERIE D'IMAGES ===== -->
+    <div class="gallery-section">
+        <div class="gallery-header">
+            <i class="fas fa-images"></i>
+            <h2>Nos foyers en images</h2>
+        </div>
+        <div class="gallery-viewport" id="galleryViewport">
+
+            <div class="gallery-slide" id="slide-0">
+                <img src="../images/foyer 1.jpg" alt="Chambre étudiante confortable">
+                <div class="gallery-caption">
+                    <h3>🛏️ Chambres confortables et meublées</h3>
+                    <p>Lit, bureau, armoire — tout ce dont vous avez besoin pour étudier sereinement</p>
+                </div>
+            </div>
+
+            <div class="gallery-slide active" id="slide-1">
+                <img src="../images/photo-1522771739844-6a9f6d5f14af.jpg" alt="Espace d'étude commun">
+                <div class="gallery-caption">
+                    <h3>📚 Espaces d'étude calmes</h3>
+                    <p>Des salles communes dédiées au travail et à la concentration</p>
+                </div>
+            </div>
+
+            <div class="gallery-slide" id="slide-2">
+                <img src="../images/photo-1555854877-bab0e564b8d5.jpg" alt="Vue extérieure foyer universitaire">
+                <div class="gallery-caption">
+                    <h3>🌿 Cadre de vie agréable</h3>
+                    <p>Des foyers bien situés, proches des universités et des transports</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="gallery-progress-bar">
+            <div class="gallery-progress-fill" id="galleryProgressFill"></div>
+        </div>
+
+        <div class="gallery-controls">
+            <div class="gallery-dots">
+                <button class="gallery-dot" onclick="goSlide(0)"></button>
+                <button class="gallery-dot active" onclick="goSlide(1)"></button>
+                <button class="gallery-dot" onclick="goSlide(2)"></button>
+            </div>
+            <div class="gallery-arrows">
+                <button class="gallery-arrow" onclick="prevSlide()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="gallery-arrow" onclick="nextSlide()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== LIENS VERS QUESTIONNAIRE ET FUN PAGE ===== -->
+    <div class="extra-links">
+        <a href="questionnaire.html" class="extra-link-card card-questionnaire">
+            <div class="extra-link-icon"><i class="fas fa-star"></i></div>
+            <div class="extra-link-text">
+                <h3>Questionnaire de satisfaction</h3>
+                <p>Donnez-nous votre avis sur nos services</p>
+            </div>
+            <i class="fas fa-arrow-right extra-link-arrow"></i>
+        </a>
+        <a href="funpage.html" class="extra-link-card card-funpage">
+            <div class="extra-link-icon"><i class="fas fa-gamepad"></i></div>
+            <div class="extra-link-text">
+                <h3>Fun Page — Word Hunt 🎮</h3>
+                <p>Jouez et détendez-vous avec notre mini-jeu</p>
+            </div>
+            <i class="fas fa-arrow-right extra-link-arrow"></i>
+        </a>
+    </div>
+
+    <!-- ===== COORDONNÉES + FORMULAIRE ===== -->
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; margin-top: 2rem;">
+
+        <div>
+            <div style="background: var(--white); padding: 2rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm);">
+                <h2><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> Coordonnées</h2>
+                <p><strong>Adresse :</strong> Place Pasteur, Tunis</p>
+                <p><strong>Téléphone :</strong> +216 71 658 857</p>
+                <p><strong>Email :</strong>
+                    <a href="mailto:contact@foyerconnect.tn">contact@foyerconnect.tn</a>
+                </p>
+                <p><strong>Horaires :</strong> Lun–Ven 9h–18h</p>
+            </div>
+        </div>
+
+        <div>
+            <form action="../php/traitement_contact.php" method="POST" style="background: var(--white); padding: 2rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm);">
+                <div class="form-group">
+                    <label for="nom">Nom complet</label>
+                    <input type="text" id="nom" name="nom" required placeholder="Votre nom">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="votre@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="sujet">Sujet</label>
+                    <input type="text" id="sujet" name="sujet" required placeholder="Objet de votre message">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="6" required placeholder="Votre message..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Envoyer
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>FoyerConnect</h4>
+            <p>La plateforme qui simplifie la recherche de logement étudiant</p>
+            <div style="margin-top: 1rem;">
+                <a href="#" style="margin-right: 1rem; color: var(--white);"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" style="margin-right: 1rem; color: var(--white);"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="color: var(--white);"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Liens rapides</h4>
+            <ul>
+                <li><a href="foyers.html">Foyers disponibles</a></li>
+                <li><a href="questionnaire.html">Questionnaire</a></li>
+                <li><a href="funpage.html">Fun Page</a></li>
+                <li><a href="inscription.html">S'inscrire</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Contact</h4>
+            <ul>
+                <li><i class="fas fa-envelope"></i> contact@foyerconnect.tn</li>
+                <li><i class="fas fa-phone"></i> +216 71 658 857</li>
+                <li><i class="fas fa-map-marker-alt"></i> Tunisie, Tunis</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 FoyerConnect. Tous droits réservés.</p>
+    </div>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+/*
+ * ============================================================
+ *  FoyerConnect - Contact : Bannière animée + Galerie
+ * ============================================================
+ */
+
+/* -------------------------------------------------------
+   BANNIÈRE ANIMÉE
+   ------------------------------------------------------- */
+function construireDateHeure() {
+    var maintenant = new Date();
+    var jours = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+    var mois  = ["janvier","février","mars","avril","mai","juin",
+                 "juillet","août","septembre","octobre","novembre","décembre"];
+
+    var dateStr =
+        jours[maintenant.getDay()]  + " " +
+        maintenant.getDate()        + " " +
+        mois[maintenant.getMonth()] + " " +
+        maintenant.getFullYear();
+
+    var heureStr =
+        String(maintenant.getHours()).padStart(2,"0")   + ":" +
+        String(maintenant.getMinutes()).padStart(2,"0") + ":" +
+        String(maintenant.getSeconds()).padStart(2,"0");
+
+    return { date: dateStr, heure: heureStr };
+}
+
+function initBanniere() {
+    var dh = construireDateHeure();
+    var d1 = document.getElementById("tickerDate");
+    var d2 = document.getElementById("tickerDate2");
+    if (d1) d1.textContent = dh.date;
+    if (d2) d2.textContent = dh.date;
+    mettreAJourHeure();
+}
+
+function mettreAJourHeure() {
+    var dh = construireDateHeure();
+    var h1 = document.getElementById("tickerHeure");
+    var h2 = document.getElementById("tickerHeure2");
+    if (h1) h1.textContent = dh.heure;
+    if (h2) h2.textContent = dh.heure;
+}
+
+initBanniere();
+setInterval(mettreAJourHeure, 1000);
+
+/* -------------------------------------------------------
+   GALERIE D'IMAGES
+   ------------------------------------------------------- */
+var slideActuel   = 1;
+var totalSlides   = 3;
+var DUREE_SLIDE   = 4000;
+var intervalGalerie = null;
+var debutSlide    = null;
+
+function goSlide(index) {
+    document.querySelectorAll(".gallery-slide").forEach(function(s) {
+        s.classList.remove("active");
+    });
+    document.querySelectorAll(".gallery-dot").forEach(function(d) {
+        d.classList.remove("active");
+    });
+
+    slideActuel = ((index % totalSlides) + totalSlides) % totalSlides;
+
+    document.getElementById("slide-" + slideActuel).classList.add("active");
+    document.querySelectorAll(".gallery-dot")[slideActuel].classList.add("active");
+
+    debutSlide = Date.now();
+    animerProgression();
+}
+
+function nextSlide() { goSlide(slideActuel + 1); redemarrerAuto(); }
+function prevSlide()  { goSlide(slideActuel - 1); redemarrerAuto(); }
+
+function animerProgression() {
+    var fill   = document.getElementById("galleryProgressFill");
+    var ecoule = Date.now() - debutSlide;
+    var pct    = Math.min((ecoule / DUREE_SLIDE) * 100, 100);
+    fill.style.width = pct + "%";
+    if (pct < 100) requestAnimationFrame(animerProgression);
+}
+
+function demarrerAutoGalerie() {
+    intervalGalerie = setInterval(function() {
+        goSlide(slideActuel + 1);
+    }, DUREE_SLIDE);
+}
+
+function redemarrerAuto() {
+    clearInterval(intervalGalerie);
+    demarrerAutoGalerie();
+}
+
+debutSlide = Date.now();
+animerProgression();
+demarrerAutoGalerie();
+</script>
+<script src="../js/Validate-contact.js"></script>
+
+</body>
+</html>

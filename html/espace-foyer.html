@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace foyer - FoyerConnect</title>
+    <link rel="stylesheet" href="../css/espace-foyer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../images/logo 1.png" alt="FoyerConnect" style="height: 40px;">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="foyers.html">Foyers</a></li>
+                <li><a href="a-propos.html">À propos</a></li>
+                <li><a href="contact-updated.html">Contact</a></li>
+                <li><a href="espace-candidat-dynamique.html">Mon Espace</a></li>
+                <li><a href="funpage.html">Fun Page 🎮</a></li>
+                <li><a href="questionnaire.html">Questionnaire ⭐</a></li>
+                <li><a href="connexion.html" class="btn-connexion">Connexion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Espace gestionnaire</h1>
+
+            <!-- Statistiques -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Demandes en attente</h3>
+                    <div class="number">12</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Demandes acceptées</h3>
+                    <div class="number">15</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Chambres disponibles</h3>
+                    <div class="number">10</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Taux d'occupation</h3>
+                    <div class="number">85%</div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 2rem;">
+                <div>
+                    <h2>Demandes récentes</h2>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Étudiant</th>
+                                    <th>Type</th>
+                                    <th>Date</th>
+                                    <th>Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ahmed Ben Saleh</td>
+                                    <td>Chambre simple</td>
+                                    <td>01/09/2026</td>
+                                    <td><span class="status status-attente">En attente</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success" style="padding: 0.4rem 1rem;"><i class="fas fa-check"></i></a>
+                                        <a href="#" class="btn btn-danger" style="padding: 0.4rem 1rem; background: var(--danger); color: white;"><i class="fas fa-times"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mariem Ben Ahmed</td>
+                                    <td>Studio</td>
+                                    <td>14/09/2026</td>
+                                    <td><span class="status status-attente">En attente</span></td>
+                                    <td>
+                                        <a href="#" class="btn btn-success" style="padding: 0.4rem 1rem;"><i class="fas fa-check"></i></a>
+                                        <a href="#" class="btn btn-danger" style="padding: 0.4rem 1rem; background: var(--danger); color: white;"><i class="fas fa-times"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Iheb Hamdi</td>
+                                    <td>Chambre double</td>
+                                    <td>13/09/2026</td>
+                                    <td><span class="status status-acceptee">Acceptée</span></td>
+                                    <td>
+                                        <span>En attente paiement</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div>
+                    <h2>Gestion des chambres</h2>
+                    <div style="background: var(--white); padding: 2rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm);">
+                        <form action="../php/foyer_ajouter.php" method="POST">
+                            <div class="form-group">
+                                <label>Ajouter une chambre</label>
+                                <input type="text" name="type_chambre" placeholder="Type de chambre">
+                            </div>
+                            <div class="form-group">
+                                <label>Prix (DT/mois)</label>
+                                <input type="number" name="prix" placeholder="450">
+                            </div>
+                            <div class="form-group">
+                                <label>Disponibilité</label>
+                                <select name="dispo">
+                                    <option value="1">Disponible</option>
+                                    <option value="0">Indisponible</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Ajouter</button>
+                        </form>
+
+                        <hr style="margin: 2rem 0;">
+
+                        <h4>Répartition actuelle</h4>
+                        <ul style="list-style: disc; margin-left: 1.5rem;">
+                            <li>Chambres simples : 12 (5 disponibles)</li>
+                            <li>Studios : 8 (2 disponibles)</li>
+                            <li>Chambres doubles : 6 (0 disponibles)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>FoyerConnect</h4>
+                <p>La plateforme qui simplifie la recherche de logement étudiant</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" style="margin-right: 1rem; color: var(--white);"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" style="margin-right: 1rem; color: var(--white);"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="color: var(--white);"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Liens rapides</h4>
+                <ul>
+                    <li><a href="foyers.html">Foyers disponibles</a></li>
+                    <li><a href="inscription.html">S'inscrire</a></li>
+                    <li><a href="connexion.html">Se connecter</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> contact@foyerconnect.tn</li>
+                    <li><i class="fas fa-phone"></i> +216 71 658 857</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Tunisie, Tunis</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 FoyerConnect. Tous droits réservés.</p>
+        </div>
+    </footer>
+</body>
+</html>

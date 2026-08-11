@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Candidat Dynamique - FoyerConnect</title>
+    <link rel="stylesheet" href="../css/espace-candidat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-box {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1.2rem 1.5rem;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+        .stat-box .num {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .stat-box .lbl {
+            font-size: 0.82rem;
+            color: var(--gray-600);
+            margin-top: 0.2rem;
+        }
+        .forms-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .form-box {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .form-box h3 {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--dark);
+        }
+        .form-box h3 i { color: var(--primary); }
+        .form-box input,
+        .form-box select {
+            width: 100%;
+            padding: 0.75rem 1.1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+            margin-bottom: 0.7rem;
+            transition: var(--transition);
+            background: var(--white);
+        }
+        .form-box input:focus,
+        .form-box select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0,102,204,0.12);
+        }
+        .btn-add {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            border: none;
+            border-radius: 40px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+        }
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0,102,204,0.3);
+        }
+        .btn-reset {
+            background: var(--gray-200);
+            color: var(--dark);
+            border: none;
+            border-radius: 40px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 0.5rem;
+            transition: var(--transition);
+        }
+        .btn-reset:hover { background: var(--gray-300); }
+        .table-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .result-count {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+        .btn-del {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+        .btn-del:hover { background: #fee2e2; }
+        .empty-row td {
+            text-align: center;
+            padding: 2.5rem;
+            color: var(--gray-600);
+        }
+        @media (max-width: 768px) {
+            .forms-row { grid-template-columns: 1fr; }
+            .stats-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="logo">
+            <a href="../index.html">
+                <img src="../images/logo 1.png" alt="FoyerConnect" style="height: 40px;">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="foyers.html">Foyers</a></li>
+            <li><a href="a-propos.html">À propos</a></li>
+            <li><a href="contact-updated.html">Contact</a></li>
+            <li><a href="espace-candidat-dynamique.html" class="active">Mon Espace</a></li>
+            <li><a href="funpage.html">Fun Page 🎮</a></li>
+            <li><a href="questionnaire.html">Questionnaire ⭐</a></li>
+            <li><a href="connexion.html" class="btn-connexion">Connexion</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+<div class="container">
+
+    <h1>Bonjour, Ahmed Ben Saleh <i class="fas fa-smile" style="color: var(--secondary);"></i></h1>
+
+    <div class="dashboard">
+
+        <div class="dashboard-sidebar">
+            <ul>
+                <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
+                <li><a href="#"><i class="fas fa-file-alt"></i> Mes demandes</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> Mon profil</a></li>
+                <li><a href="#"><i class="fas fa-file-pdf"></i> Documents</a></li>
+                <li><a href="#"><i class="fas fa-envelope"></i> Messagerie</a></li>
+            </ul>
+        </div>
+
+        <div>
+
+            <div class="stats-row">
+                <div class="stat-box">
+                    <div class="num" id="statTotal">3</div>
+                    <div class="lbl">Total demandes</div>
+                </div>
+                <div class="stat-box">
+                    <div class="num" id="statAttente" style="color: #856404;">1</div>
+                    <div class="lbl">En attente</div>
+                </div>
+                <div class="stat-box">
+                    <div class="num" id="statAcceptee" style="color: var(--success);">1</div>
+                    <div class="lbl">Acceptées</div>
+                </div>
+            </div>
+
+            <div class="forms-row">
+
+                <div class="form-box">
+                    <h3><i class="fas fa-plus-circle"></i> Ajouter une demande</h3>
+                    <input type="text" id="addFoyer" placeholder="Nom du foyer *">
+                    <input type="text" id="addType" placeholder="Type de chambre *">
+                    <input type="date" id="addDate">
+                    <select id="addStatut">
+                        <option value="attente">En attente</option>
+                        <option value="acceptee">Acceptée</option>
+                        <option value="refusee">Refusée</option>
+                    </select>
+                    <button class="btn-add" onclick="ajouterDemande()">
+                        <i class="fas fa-plus"></i> Ajouter
+                    </button>
+                </div>
+
+                <div class="form-box">
+                    <h3><i class="fas fa-search"></i> Rechercher une demande</h3>
+                    <input type="text" id="searchInput" placeholder="Foyer ou type de chambre..." oninput="rechercherDemandes()">
+                    <select id="searchStatut" onchange="rechercherDemandes()">
+                        <option value="">Tous les statuts</option>
+                        <option value="attente">En attente</option>
+                        <option value="acceptee">Acceptée</option>
+                        <option value="refusee">Refusée</option>
+                    </select>
+                    <button class="btn-reset" onclick="reinitialiserRecherche()">
+                        <i class="fas fa-times"></i> Réinitialiser la recherche
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="table-title-row">
+                <h2>Mes demandes en cours</h2>
+                <span class="result-count" id="resultCount">3 résultat(s)</span>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Foyer</th>
+                            <th>Type de chambre</th>
+                            <th>Date demande</th>
+                            <th>Statut</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 2rem; background: var(--white); padding: 2rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm);">
+                <h3>Prochaines étapes</h3>
+                <p>Votre demande pour le <strong>Foyer Universitaire Privé pour filles – Sfax El Jadida</strong> a été acceptée. Veuillez procéder au paiement des frais de dossier pour finaliser votre inscription.</p>
+                <a href="#" class="btn btn-success" style="display:inline-block; margin-top:1rem;">
+                    <i class="fas fa-credit-card"></i> Payer en ligne
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>FoyerConnect</h4>
+            <p>La plateforme qui simplifie la recherche de logement étudiant</p>
+            <div style="margin-top: 1rem;">
+                <a href="#" style="margin-right: 1rem; color: var(--white);"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" style="margin-right: 1rem; color: var(--white);"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="color: var(--white);"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Liens rapides</h4>
+            <ul>
+                <li><a href="foyers.html">Foyers disponibles</a></li>
+                <li><a href="inscription.html">S'inscrire</a></li>
+                <li><a href="connexion.html">Se connecter</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Contact</h4>
+            <ul>
+                <li><i class="fas fa-envelope"></i> contact@foyerconnect.tn</li>
+                <li><i class="fas fa-phone"></i> +216 71 658 857</li>
+                <li><i class="fas fa-map-marker-alt"></i> Tunisie, Tunis</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 FoyerConnect. Tous droits réservés.</p>
+    </div>
+</footer>
+
+<script>
+/*
+ * ============================================================
+ *  FoyerConnect - Espace Candidat : JavaScript Dynamique
+ * ============================================================
+ */
+
+function Demande(foyer, type, date, statut) {
+    this.id     = ++Demande.compteur;
+    this.foyer  = foyer;
+    this.type   = type;
+    this.date   = date;
+    this.statut = statut;
+}
+Demande.compteur = 0;
+
+var demandes = [
+    new Demande("Foyer Universitaire Moncef Bey", "Chambre simple", "2024-05-15", "attente"),
+    new Demande("Foyer Universitaire Privé pour filles – Sfax El Jadida", "Studio", "2024-05-10", "acceptee"),
+    new Demande("Foyer El Ikbel", "Chambre double", "2024-05-01", "refusee")
+];
+
+function afficherTableau(liste) {
+    var tbody = document.getElementById("tableBody");
+    tbody.innerHTML = "";
+
+    if (liste.length === 0) {
+        tbody.innerHTML =
+            '<tr class="empty-row"><td colspan="6">' +
+            '<i class="fas fa-inbox" style="font-size:2rem; display:block; margin-bottom:.5rem;"></i>' +
+            'Aucune demande trouvée.</td></tr>';
+        document.getElementById("resultCount").textContent = "0 résultat";
+        return;
+    }
+
+    for (var i = 0; i < liste.length; i++) {
+        tbody.appendChild(creerLigne(liste[i], i + 1));
+    }
+
+    document.getElementById("resultCount").textContent = liste.length + " résultat(s)";
+}
+
+function creerLigne(d, num) {
+    var badges = {
+        attente:  { cls: "status status-attente",  txt: '<i class="fas fa-clock"></i> En attente' },
+        acceptee: { cls: "status status-acceptee", txt: '<i class="fas fa-check-circle"></i> Acceptée' },
+        refusee:  { cls: "status status-refusee",  txt: '<i class="fas fa-times-circle"></i> Refusée' }
+    };
+    var b = badges[d.statut] || badges["attente"];
+    var dateAff = d.date ? d.date.split("-").reverse().join("/") : "—";
+
+    var tr = document.createElement("tr");
+    tr.innerHTML =
+        "<td>" + num + "</td>" +
+        "<td><strong>" + d.foyer + "</strong></td>" +
+        "<td>" + d.type + "</td>" +
+        "<td>" + dateAff + "</td>" +
+        "<td><span class='" + b.cls + "'>" + b.txt + "</span></td>" +
+        "<td>" +
+            "<a href='#' class='btn btn-outline' style='padding:0.4rem 0.9rem; font-size:0.85rem;'>Voir</a>" +
+            " <button class='btn-del' onclick='supprimerDemande(" + d.id + ")' title='Supprimer'>" +
+            "<i class='fas fa-trash'></i></button>" +
+        "</td>";
+    return tr;
+}
+
+function ajouterDemande() {
+    var foyer  = document.getElementById("addFoyer").value.trim();
+    var type   = document.getElementById("addType").value.trim();
+    var date   = document.getElementById("addDate").value;
+    var statut = document.getElementById("addStatut").value;
+
+    if (!foyer || !type) {
+        alert("Veuillez remplir au moins le nom du foyer et le type de chambre.");
+        return;
+    }
+    if (!date) {
+        var today = new Date();
+        date = today.getFullYear() + "-" +
+               String(today.getMonth() + 1).padStart(2, "0") + "-" +
+               String(today.getDate()).padStart(2, "0");
+    }
+
+    demandes.push(new Demande(foyer, type, date, statut));
+
+    document.getElementById("addFoyer").value  = "";
+    document.getElementById("addType").value   = "";
+    document.getElementById("addDate").value   = "";
+    document.getElementById("addStatut").value = "attente";
+
+    afficherTableau(demandes);
+    mettreAJourStats();
+}
+
+function rechercherDemandes() {
+    var texte  = document.getElementById("searchInput").value.toLowerCase().trim();
+    var statut = document.getElementById("searchStatut").value;
+
+    var resultats = demandes.filter(function(d) {
+        var okTexte  = !texte  || d.foyer.toLowerCase().includes(texte) || d.type.toLowerCase().includes(texte);
+        var okStatut = !statut || d.statut === statut;
+        return okTexte && okStatut;
+    });
+
+    afficherTableau(resultats);
+}
+
+function reinitialiserRecherche() {
+    document.getElementById("searchInput").value  = "";
+    document.getElementById("searchStatut").value = "";
+    afficherTableau(demandes);
+    mettreAJourStats();
+}
+
+function supprimerDemande(id) {
+    if (!confirm("Confirmer la suppression de cette demande ?")) return;
+    demandes = demandes.filter(function(d) { return d.id !== id; });
+    afficherTableau(demandes);
+    mettreAJourStats();
+}
+
+function mettreAJourStats() {
+    document.getElementById("statTotal").textContent    = demandes.length;
+    document.getElementById("statAttente").textContent  = demandes.filter(function(d) { return d.statut === "attente"; }).length;
+    document.getElementById("statAcceptee").textContent = demandes.filter(function(d) { return d.statut === "acceptee"; }).length;
+}
+
+window.onload = function() {
+    afficherTableau(demandes);
+    mettreAJourStats();
+};
+</script>
+
+</body>
+</html>

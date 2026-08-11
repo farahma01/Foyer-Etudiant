@@ -1,0 +1,519 @@
+/* ===== BASE COMMUNE ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary: #0066cc;
+    --primary-dark: #0052a3;
+    --secondary: #ff8c42;
+    --secondary-dark: #e6732e;
+    --accent: #ffb347;
+    --danger: #ef476f;
+    --warning: #ff9b42;
+    --success: #06d6a0;
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --gray-300: #dee2e6;
+    --gray-600: #6c757d;
+    --gray-800: #343a40;
+    --dark: #212529;
+    --white: #ffffff;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+    --transition: all 0.25s ease-in-out;
+    --border-radius: 16px;
+    --border-radius-sm: 8px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    background: linear-gradient(135deg, #0d1b2a 0%, #1b2d4f 50%, #0d1b2a 100%);
+    min-height: 100vh;
+}
+
+a { 
+    text-decoration: none; 
+    color: var(--primary); 
+    transition: var(--transition); 
+}
+a:hover { 
+            color: var(--primary-dark);
+}
+ul { list-style: none; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* ===== HEADER ===== */
+header {
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.logo img { height: 40px; width: auto; }
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: var(--transition);
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+.btn-connexion {
+    background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+    color: var(--white) ;
+    padding: 0.6rem 1.5rem ;
+    border-radius: 40px;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(255,140,66,0.3);
+}
+.btn-connexion:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(255,140,66,0.4); }
+
+/* ===== MAIN GAME CONTAINER ===== */
+.game-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 4rem;
+}
+
+/* EN-TÊTE DU JEU */
+.game-hero {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.game-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ffd166, #ff8c42);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.game-subtitle {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.95rem;
+}
+
+/* HUD */
+.hud {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.hud-card {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 0.8rem 2rem;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    min-width: 110px;
+}
+
+.hud-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(255,255,255,0.6);
+}
+
+.hud-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffd166;
+}
+
+/* ===== ZONE DE PROPAGATION (3 niveaux imbriqués) ===== */
+
+/* NIVEAU 1 : div externe */
+.outer {
+    background: rgba(0, 102, 204, 0.15);
+    border: 2px dashed rgba(0, 102, 204, 0.5);
+    border-radius: 18px;
+    padding: 20px;
+    cursor: default;
+    position: relative;
+    transition: var(--transition);
+    margin-bottom: 1.5rem;
+}
+
+/* NIVEAU 2 : zone de jeu */
+.game-zone {
+    background: rgba(255, 140, 66, 0.12);
+    border: 2px dashed rgba(255, 140, 66, 0.5);
+    border-radius: 14px;
+    padding: 18px;
+    cursor: default;
+    position: relative;
+    transition: var(--transition);
+}
+
+.level-badge {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+}
+
+.level1 {
+    background: rgba(0, 102, 204, 0.3);
+    color: #90c4ff;
+}
+
+.level2 {
+    background: rgba(255, 140, 66, 0.3);
+    color: #ffc285;
+}
+
+/* ===== GRILLE DE LETTRES (Niveau 3) ===== */
+.letter-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    justify-content: center;
+    margin-top: 0.5rem;
+    padding-top: 1.5rem;
+}
+
+/* NIVEAU 3 : cellule interactive */
+.letter-cell {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+    text-transform: uppercase;
+    color: var(--white);
+}
+
+.letter-cell:hover {
+    background: rgba(255, 209, 102, 0.3);
+    border-color: #ffd166;
+    transform: scale(1.12);
+    color: #ffd166;
+}
+
+.letter-cell.selected {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-color: var(--primary);
+    color: var(--white);
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(0,102,204,0.4);
+}
+
+.letter-cell.found {
+    background: linear-gradient(135deg, var(--success), #05b388);
+    border-color: var(--success);
+    color: var(--white);
+    cursor: default;
+    transform: none;
+}
+
+.letter-cell.wrong {
+    background: rgba(239, 71, 111, 0.4);
+    border-color: var(--danger);
+    animation: shake 0.35s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25%       { transform: translateX(-6px); }
+    75%       { transform: translateX(6px); }
+}
+
+/* ZONE D'AFFICHAGE DU MOT EN COURS */
+.guess-area {
+    margin-top: 1.2rem;
+    text-align: center;
+}
+
+.guess-display {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.5rem;
+    color: #ffd166;
+    min-height: 3rem;
+    margin-bottom: 1rem;
+}
+
+.guess-btns {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.btn-valider {
+    background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+    color: var(--white);
+    border: none;
+    border-radius: 40px;
+    padding: 0.75rem 1.8rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(255,140,66,0.3);
+}
+
+.btn-valider:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255,140,66,0.4);
+}
+
+.btn-effacer {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255,255,255,0.8);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: 40px;
+    padding: 0.75rem 1.8rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-effacer:hover {
+    background: rgba(255,255,255,0.22);
+    color: var(--white);
+}
+
+/* ===== GRILLE SECONDAIRE ===== */
+.game-footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.info-box {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--border-radius);
+    padding: 1.3rem;
+}
+
+.info-box h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* LISTE DE MOTS */
+.word-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 8px;
+    margin-bottom: 0.4rem;
+    background: rgba(255,255,255,0.06);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    transition: var(--transition);
+}
+
+.word-item.found-word {
+    background: rgba(6, 214, 160, 0.2);
+    color: var(--success);
+    text-decoration: line-through;
+}
+
+/* COMMENT JOUER */
+.how-to {
+    padding-left: 1.2rem;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.9;
+}
+
+kbd {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 4px;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.8rem;
+    font-family: monospace;
+    color: var(--white);
+}
+
+/* JOURNAL D'ÉVÉNEMENTS */
+.event-log-box {
+    max-height: 140px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.log-entry {
+    font-size: 0.78rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    margin-bottom: 0.3rem;
+    font-family: monospace;
+    line-height: 1.4;
+}
+
+.log-cell    { background: rgba(6,214,160,0.2);   color: #7aefd5; }
+.log-zone    { background: rgba(255,140,66,0.2);  color: #ffc285; }
+.log-outer   { background: rgba(0,102,204,0.2);   color: #90c4ff; }
+.log-stop    { background: rgba(239,71,111,0.2);  color: #ff8fab; }
+.log-success { background: rgba(6,214,160,0.25);  color: #7aefd5; }
+.log-error   { background: rgba(239,71,111,0.2);  color: #ff8fab; }
+.log-info    { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+
+/* ===== OVERLAY VICTOIRE ===== */
+.win-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.4s ease;
+}
+
+.win-box {
+    background: linear-gradient(135deg, #0d1b2a, #1b2d4f);
+    border: 2px solid #ffd166;
+    border-radius: 24px;
+    padding: 3rem;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+}
+
+.win-emoji { font-size: 4rem; margin-bottom: 1rem; }
+.win-box h2 { color: #ffd166; font-size: 1.8rem; margin-bottom: 0.5rem; }
+.win-box p  { color: rgba(255,255,255,0.8); margin-bottom: 1.5rem; }
+
+.btn-restart {
+    background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+    color: var(--white);
+    border: none;
+    border-radius: 40px;
+    padding: 0.85rem 2.2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: var(--transition);
+}
+
+.btn-restart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255,140,66,0.4);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background: rgba(0,0,0,0.6);
+    color: var(--white);
+    padding: 3rem 2rem 1.5rem;
+    margin-top: 2rem;
+}
+
+.footer-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+}
+
+.footer-section h4 {
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+    color: var(--white);
+}
+
+.footer-section ul li { margin-bottom: 0.7rem; }
+.footer-section a { color: rgba(255,255,255,0.6); }
+.footer-section a:hover { color: var(--secondary); }
+.footer-section p { color: rgba(255,255,255,0.6); }
+
+.footer-bottom {
+    max-width: 1280px;
+    margin: 1.5rem auto 0;
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.4);
+    font-size: 0.85rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .game-footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+    nav { flex-direction: column; gap: 1rem; padding: 1rem; }
+    .nav-links { flex-wrap: wrap; justify-content: center; gap: 0.8rem; }
+    .game-footer-grid { grid-template-columns: 1fr; }
+    .letter-cell { width: 38px; height: 38px; font-size: 0.95rem; }
+    .hud { gap: 0.8rem; }
+    .hud-card { padding: 0.6rem 1rem; min-width: 80px; }
+    .game-title { font-size: 1.8rem; }
+}

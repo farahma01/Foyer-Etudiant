@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoyerConnect - Trouvez votre logement étudiant</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .intro-text {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            max-width: 700px;
+            margin: 1rem auto 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo 1.png" alt="FoyerConnect" style="height: 40px;"> <!-- inline -->
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Accueil</a></li>
+                <li><a href="html/foyers.html">Foyers</a></li>
+                <li><a href="html/a-propos.html">À propos</a></li>
+                <li><a href="html/contact-updated.html">Contact</a></li>
+                <li><a href="html/espace-candidat-dynamique.html">Mon Espace</a></li>
+                <li><a href="html/funpage.html">Fun Page 🎮</a></li>
+                <li><a href="html/questionnaire.html">Questionnaire ⭐</a></li>
+                <li><a href="html/connexion.html" class="btn-connexion">Connexion</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>Trouvez votre foyer étudiant idéal</h1>
+            <p>Simplifiez votre recherche de logement avec FoyerConnect</p>
+            <form class="search-box" action="php/recherche.php" method="GET">
+                <input type="text" name="q" placeholder="Tapez votre université...">
+                <button type="submit"><i class="fas fa-search"></i> Rechercher</button>
+            </form>
+        </section>
+
+        <div class="container">
+            <section>
+                <h2>Foyers populaires</h2>
+                <p class="intro-text">Découvrez les résidences les plus demandées par les étudiants</p>
+                <div class="card-grid">
+
+                    <div class="card">
+                        <img src="images/foyer 1.jpg" class="card-img" alt="chambre">
+
+                        <div class="card-content">
+                            <h3 style="color:red">Foyer Universitaire Moncef Bey</h3>
+                            <p class="card-meta"><i class="fas fa-map-marker-alt"></i> Tunis</p>
+                            <p><strong>Les Prix De 220TND à 290TND/mois</strong></p>
+                            <a href="foyer-moncefbey.html" class="btn btn-outline" style="margin-top: 1rem;">Voir détails</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img src="images/photo-1555854877-bab0e564b8d5.jpg" class="card-img" alt="chambre">
+
+                        <div class="card-content">
+                            <h3 style="color:red">Foyer Universitaire Privé pour filles</h3>
+                            <p class="card-meta"><i class="fas fa-map-marker-alt"></i> Sfax El Jadida (3001 Sfax)</p>
+                            <p><strong>Les Prix de 200TND à 300TND/mois</strong></p>
+                            <a href="foyer-sfax-filles.html" class="btn btn-outline" style="margin-top: 1rem;">Voir détails</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img src="images/photo-1522771739844-6a9f6d5f14af.jpg" class="card-img" alt="chambre">
+
+                        <div class="card-content">
+                            <h3 style="color:red">Foyer El Ikbel</h3>
+                            <p class="card-meta"><i class="fas fa-map-marker-alt"></i> Ariana (proche Tunis)</p>
+                            <p><strong>Les Prix De 250TND à 395TND/mois</strong></p>
+                            <a href="foyer-el-ikbel.html" class="btn btn-outline" style="margin-top: 1rem;">Voir détails</a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Grille 5 colonnes / 3 lignes -->
+            <section style="margin-top: 4rem;">
+                <h2>Ils nous font confiance</h2>
+                <div class="grid-5-col">
+                    <div class="grid-item"><i class="fas fa-university"></i> Tunis</div>
+                    <div class="grid-item"><i class="fas fa-university"></i> Nabeul</div>
+                    <div class="grid-item"><i class="fas fa-university"></i> Jendouba</div>
+                    <div class="grid-item"><i class="fas fa-building"></i> Ben Arous</div>
+                    <div class="grid-item"><i class="fas fa-hotel"></i> Ariana</div>
+                    <div class="grid-item"><i class="fas fa-hotel"></i> Manouba</div>
+                    <div class="grid-item"><i class="fas fa-leaf"></i> Ariana</div>
+                    <div class="grid-item"><i class="fas fa-globe"></i> Monastir</div>
+                    <div class="grid-item"><i class="fas fa-flag"></i> Sousse</div>
+                    <div class="grid-item"><i class="fas fa-home"></i> Mehdia</div>
+                    <div class="grid-item"><i class="fas fa-users"></i> kairawan</div>
+                    <div class="grid-item"><i class="fas fa-hand-holding-heart"></i> Médenine</div>
+                    <div class="grid-item"><i class="fas fa-graduation-cap"></i> ElKef</div>
+                    <div class="grid-item"><i class="fas fa-heartbeat"></i> Sidi Bouzid</div>
+                    <div class="grid-item"><i class="fas fa-euro-sign"></i> Gafsa</div>
+                </div>
+            </section>
+
+            <section style="margin-top: 4rem;">
+                <h2>Comment ça marche ?</h2>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2rem;">
+                    <div style="text-align: center; background: var(--white); padding: 2rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm);">
+                        <div style="font-size: 3rem; color: var(--primary);">🔍</div>
+                        <h3>Recherchez</h3>
+                        <p>Trouvez le foyer qui correspond à vos critères</p>
+                    </div>
+                    <div style="text-align: center; background: var(--white); padding: 2rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm);">
+                        <div style="font-size: 3rem; color: var(--primary);">📝</div>
+                        <h3>Inscrivez-vous</h3>
+                        <p>Remplissez votre demande en quelques clics</p>
+                    </div>
+                    <div style="text-align: center; background: var(--white); padding: 2rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm);">
+                        <div style="font-size: 3rem; color: var(--primary);">📊</div>
+                        <h3>Suivez votre demande</h3>
+                        <p>Consultez l'état de votre inscription en temps réel</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>FoyerConnect</h4>
+                <p>La plateforme qui simplifie la recherche de logement étudiant</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" style="margin-right: 1rem; color: var(--white);"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" style="margin-right: 1rem; color: var(--white);"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="color: var(--white);"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Liens rapides</h4>
+                <ul>
+                    <li><a href="html/foyers.html">Foyers disponibles</a></li>
+                    <li><a href="html/inscription.html">S'inscrire</a></li>
+                    <li><a href="html/connexion.html">Se connecter</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> contact@foyerconnect.tn</li>
+                    <li><i class="fas fa-phone"></i> +216 71 658 857</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Tunisie , Tunis</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 FoyerConnect. Tous droits réservés.</p>
+        </div>
+    </footer>
+</body>
+</html>

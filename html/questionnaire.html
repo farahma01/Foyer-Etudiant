@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<!--
+    FoyerConnect - Page Questionnaire
+    Auteurs : Équipe FoyerConnect
+    Intégration : Utilise les mêmes variables CSS que les autres pages
+                  Fichier CSS dédié : questionnaire.css
+-->
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire - FoyerConnect</title>
+    <link rel="stylesheet" href="../css/questionnaire.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body> 
+
+<!-- ===== HEADER ===== -->
+<header>
+    <nav>
+        <div class="logo">
+            <a href="../index.html">
+                <img src="../images/logo 1.png" alt="FoyerConnect" style="height: 40px;">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="foyers.html">Foyers</a></li>
+            <li><a href="a-propos.html">À propos</a></li>
+            <li><a href="contact-updated.html">Contact</a></li>
+            <li><a href="espace-candidat-dynamique.html">Mon Espace</a></li>
+            <li><a href="funpage.html">Fun Page 🎮</a></li>
+            <li><a href="questionnaire.html" style="color: #007bff; font-weight: 600; padding: 0.5rem 0; text-decoration: underline;">Questionnaire ⭐</a></li>
+            <li><a href="connexion.html" class="btn-connexion">Connexion</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+<div class="container">
+
+    <!-- EN-TÊTE DE PAGE -->
+    <div class="page-hero">
+        <div class="hero-icon"><i class="fas fa-star"></i></div>
+        <h1>Votre avis compte !</h1>
+        <p>Aidez-nous à améliorer FoyerConnect en partageant votre expérience</p>
+    </div>
+
+    <!-- BARRE DE PROGRESSION -->
+    <div class="progress-wrap">
+        <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+    </div>
+
+    <!-- MESSAGE DE SUCCÈS (caché par défaut) -->
+    <div class="success-box" id="successBox">
+        <div class="success-icon">🎉</div>
+        <h3>Merci pour votre avis !</h3>
+        <p>Votre réponse a bien été enregistrée. Elle nous aidera à améliorer nos services.</p>
+        <a href="../index.html" class="btn-retour"><i class="fas fa-home"></i> Retour à l'accueil</a>
+    </div>
+
+    <!-- FORMULAIRE -->
+    <div class="form-card" id="formCard">
+        <form id="questionnaireForm" novalidate="">
+
+            <!-- SECTION 1 : Identité -->
+            <div class="form-section">
+                <p class="section-title"><i class="fas fa-user"></i> Informations personnelles</p>
+
+                <!-- CONTRÔLE 1 : Textbox - Nom -->
+                <div class="form-group">
+                    <label for="nom">Nom complet <span class="required">*</span></label>
+                    <input type="text" id="nom" class="form-control" placeholder="Votre nom et prénom" oninput="validerChamp('nom'); updateProgress()">
+                    <span class="error-msg" id="err-nom">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Veuillez entrer votre nom complet (minimum 3 caractères).
+                    </span>
+                </div>
+
+                <!-- CONTRÔLE 2 : Email -->
+                <div class="form-group">
+                    <label for="email">Adresse email <span class="required">*</span></label>
+                    <input type="email" id="email" class="form-control" placeholder="votre@email.com" oninput="validerChamp('email'); updateProgress()">
+                    <span class="error-msg" id="err-email">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Veuillez entrer une adresse email valide.
+                    </span>
+                </div>
+
+                <!-- CONTRÔLE 3 : Select - Statut -->
+                <div class="form-group">
+                    <label for="statut">Vous êtes <span class="required">*</span></label>
+                    <select id="statut" class="form-control" onchange="validerChamp('statut'); updateProgress()">
+                        <option value="">-- Sélectionnez votre statut --</option>
+                        <option value="etudiant">Étudiant(e)</option>
+                        <option value="parent">Parent d'étudiant</option>
+                        <option value="gestionnaire">Gestionnaire de foyer</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                    <span class="error-msg" id="err-statut">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Veuillez sélectionner votre statut.
+                    </span>
+                </div>
+            </div>
+
+            <!-- SECTION 2 : Expérience -->
+            <div class="form-section">
+                <p class="section-title"><i class="fas fa-star"></i> Votre expérience</p>
+
+                <!-- CONTRÔLE 4 : Radio - Satisfaction globale -->
+                <div class="form-group">
+                    <label>Satisfaction globale <span class="required">*</span></label>
+                    <div class="radio-group" id="radioSatisfaction">
+                        <label class="radio-pill" onclick="selectRadio(this, 'tres-satisfait')">
+                            <input type="radio" name="satisfaction" value="tres-satisfait">
+                            😊 Très satisfait
+                        </label>
+                        <label class="radio-pill" onclick="selectRadio(this, 'satisfait')">
+                            <input type="radio" name="satisfaction" value="satisfait">
+                            🙂 Satisfait
+                        </label>
+                        <label class="radio-pill" onclick="selectRadio(this, 'neutre')">
+                            <input type="radio" name="satisfaction" value="neutre">
+                            😐 Neutre
+                        </label>
+                        <label class="radio-pill" onclick="selectRadio(this, 'insatisfait')">
+                            <input type="radio" name="satisfaction" value="insatisfait">
+                            😕 Insatisfait
+                        </label>
+                    </div>
+                    <span class="error-msg" id="err-satisfaction">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Veuillez indiquer votre niveau de satisfaction.
+                    </span>
+                </div>
+
+                <!-- CONTRÔLE 5 : Étoiles (radio) -->
+                <div class="form-group">
+                    <label>Note de la plateforme (sur 5)</label>
+                    <div class="star-group">
+                        <input type="radio" id="star5" name="note" value="5"><label for="star5" title="5 étoiles">★</label>
+                        <input type="radio" id="star4" name="note" value="4"><label for="star4" title="4 étoiles">★</label>
+                        <input type="radio" id="star3" name="note" value="3"><label for="star3" title="3 étoiles">★</label>
+                        <input type="radio" id="star2" name="note" value="2"><label for="star2" title="2 étoiles">★</label>
+                        <input type="radio" id="star1" name="note" value="1"><label for="star1" title="1 étoile">★</label>
+                    </div>
+                </div>
+
+                <!-- CONTRÔLE 6 : Checkbox - Fonctionnalités appréciées -->
+                <div class="form-group">
+                    <label>Fonctionnalités appréciées (plusieurs choix possibles)</label>
+                    <div class="check-group">
+                        <label class="check-pill" onclick="toggleCheck(this)">
+                            <input type="checkbox" value="recherche">
+                            <i class="fas fa-search"></i> Recherche de foyers
+                        </label>
+                        <label class="check-pill" onclick="toggleCheck(this)">
+                            <input type="checkbox" value="inscription">
+                            <i class="fas fa-edit"></i> Inscription en ligne
+                        </label>
+                        <label class="check-pill" onclick="toggleCheck(this)">
+                            <input type="checkbox" value="suivi">
+                            <i class="fas fa-chart-line"></i> Suivi des demandes
+                        </label>
+                        <label class="check-pill" onclick="toggleCheck(this)">
+                            <input type="checkbox" value="design">
+                            <i class="fas fa-palette"></i> Design du site
+                        </label>
+                        <label class="check-pill" onclick="toggleCheck(this)">
+                            <input type="checkbox" value="support">
+                            <i class="fas fa-headset"></i> Support
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- SECTION 3 : Avis détaillé -->
+            <div class="form-section">
+                <p class="section-title"><i class="fas fa-comment-dots"></i> Avis détaillé</p>
+
+                <!-- CONTRÔLE 7 : Textarea - Commentaire libre -->
+                <div class="form-group">
+                    <label for="commentaire">Votre commentaire <span class="required">*</span></label>
+                    <textarea id="commentaire" class="form-control" rows="5" placeholder="Partagez votre expérience, vos suggestions ou remarques..." oninput="validerChamp('commentaire'); updateProgress()"></textarea>
+                    <span class="error-msg" id="err-commentaire">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Veuillez écrire un commentaire d'au moins 20 caractères.
+                    </span>
+                    <span class="char-count" id="charCount">0 / 20 caractères minimum</span>
+                </div>
+
+                <!-- CONTRÔLE 8 : Checkbox - Accord -->
+                <div class="form-group">
+                    <label class="check-pill check-pill-full" id="rgpdLabel" onclick="toggleCheck(this); validerChamp('rgpd'); updateProgress()">
+                        <input type="checkbox" id="rgpd" value="ok">
+                        J'accepte que mes données soient utilisées pour améliorer le service
+                        <span class="required">*</span>
+                    </label>
+                    <span class="error-msg" id="err-rgpd">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Vous devez accepter pour envoyer le formulaire.
+                    </span>
+                </div>
+            </div>
+
+            <button type="button" class="btn-submit" onclick="soumettre()">
+                <i class="fas fa-paper-plane"></i> Envoyer mon avis
+            </button>
+
+        </form>
+    </div>
+
+</div>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>FoyerConnect</h4>
+            <p>La plateforme qui simplifie la recherche de logement étudiant</p>
+            <div style="margin-top: 1rem;">
+                <a href="#" style="margin-right: 1rem; color: var(--white);"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" style="margin-right: 1rem; color: var(--white);"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="color: var(--white);"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h4>Liens rapides</h4>
+            <ul>
+                <li><a href="foyers.html">Foyers disponibles</a></li>
+                <li><a href="inscription.html">S'inscrire</a></li>
+                <li><a href="connexion.html">Se connecter</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Contact</h4>
+            <ul>
+                <li><i class="fas fa-envelope"></i> contact@foyerconnect.tn</li>
+                <li><i class="fas fa-phone"></i> +216 71 658 857</li>
+                <li><i class="fas fa-map-marker-alt"></i> Tunisie, Tunis</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 FoyerConnect. Tous droits réservés.</p>
+    </div>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+/*
+ * ============================================================
+ *  FoyerConnect - Questionnaire : Validation JavaScript
+ *  Auteurs : Maatreg Farah et Elkhadrawi Khouloud
+ * ============================================================
+ */
+
+/* Valeur du radio "satisfaction" sélectionné */
+var satisfactionValue = "";
+
+/**
+ * Sélectionne un bouton radio sous forme de "pill"
+ * Gère l'apparence visuelle et stocke la valeur choisie
+ * @param {HTMLElement} el     - l'élément label cliqué
+ * @param {string}      valeur - valeur associée au radio
+ */
+function selectRadio(el, valeur) {
+    // Retirer la sélection de tous les pills du groupe
+    var allPills = document.querySelectorAll("#radioSatisfaction .radio-pill");
+    allPills.forEach(function(p) { p.classList.remove("selected"); });
+
+    // Marquer ce pill comme sélectionné
+    el.classList.add("selected");
+    satisfactionValue = valeur;
+    cacherErreur("satisfaction");
+    updateProgress();
+}
+
+/**
+ * Bascule l'état d'un checkbox "pill" (sélectionné / non sélectionné)
+ * @param {HTMLElement} el - l'élément label cliqué
+ */
+function toggleCheck(el) {
+    el.classList.toggle("selected");
+}
+
+/* -------------------------------------------------------
+   VALIDATION JAVASCRIPT — 5 champs validés
+   ------------------------------------------------------- */
+
+/**
+ * Valide un champ spécifique par son identifiant
+ * @param {string} champ - identifiant du champ à valider
+ * @returns {boolean} true si le champ est valide, false sinon
+ */
+function validerChamp(champ) {
+
+    // VALIDATION 1 : Nom (minimum 3 caractères)
+    if (champ === "nom") {
+        var val = document.getElementById("nom").value.trim();
+        if (val.length < 3) { afficherErreur("nom"); return false; }
+        cacherErreur("nom");
+        marquerOk("nom");
+        return true;
+    }
+
+    // VALIDATION 2 : Email (format valide avec regex)
+    if (champ === "email") {
+        var val = document.getElementById("email").value.trim();
+        var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!regex.test(val)) { afficherErreur("email"); return false; }
+        cacherErreur("email");
+        marquerOk("email");
+        return true;
+    }
+
+    // VALIDATION 3 : Statut (une option doit être sélectionnée)
+    if (champ === "statut") {
+        var val = document.getElementById("statut").value;
+        if (!val) { afficherErreur("statut"); return false; }
+        cacherErreur("statut");
+        marquerOk("statut");
+        return true;
+    }
+
+    // VALIDATION 4 : Commentaire (minimum 20 caractères)
+    if (champ === "commentaire") {
+        var val = document.getElementById("commentaire").value.trim();
+        document.getElementById("charCount").textContent = val.length + " / 20 caractères minimum";
+        if (val.length < 20) { afficherErreur("commentaire"); return false; }
+        cacherErreur("commentaire");
+        marquerOk("commentaire");
+        return true;
+    }
+
+    // VALIDATION 5 : Satisfaction (un choix obligatoire)
+    if (champ === "satisfaction") {
+        if (!satisfactionValue) { afficherErreur("satisfaction"); return false; }
+        cacherErreur("satisfaction");
+        return true;
+    }
+
+    // VALIDATION 6 : RGPD (doit être coché)
+    if (champ === "rgpd") {
+        var checked = document.getElementById("rgpdLabel").classList.contains("selected");
+        if (!checked) { afficherErreur("rgpd"); return false; }
+        cacherErreur("rgpd");
+        return true;
+    }
+
+    return true;
+}
+
+/** Affiche le message d'erreur pour un champ */
+function afficherErreur(id) {
+    var msg = document.getElementById("err-" + id);
+    if (msg) msg.classList.add("show");
+    var input = document.getElementById(id);
+    if (input) { input.classList.add("error"); input.classList.remove("valid"); }
+}
+
+/** Cache le message d'erreur pour un champ */
+function cacherErreur(id) {
+    var msg = document.getElementById("err-" + id);
+    if (msg) msg.classList.remove("show");
+}
+
+/** Marque un champ comme valide (bordure verte) */
+function marquerOk(id) {
+    var input = document.getElementById(id);
+    if (input) { input.classList.add("valid"); input.classList.remove("error"); }
+}
+
+/**
+ * Met à jour la barre de progression selon les champs remplis
+ * (5 champs obligatoires)
+ */
+function updateProgress() {
+    var ok = 0;
+    if (document.getElementById("nom").value.trim().length >= 3) ok++;
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById("email").value.trim())) ok++;
+    if (document.getElementById("statut").value) ok++;
+    if (satisfactionValue) ok++;
+    if (document.getElementById("commentaire").value.trim().length >= 20) ok++;
+    document.getElementById("progressBar").style.width = Math.round((ok / 5) * 100) + "%";
+}
+
+/**
+ * Valide tous les champs et soumet le formulaire si tout est correct
+ */
+function soumettre() {
+    // Valider chaque champ obligatoire
+    var ok = true;
+    ok = validerChamp("nom")          && ok;
+    ok = validerChamp("email")        && ok;
+    ok = validerChamp("statut")       && ok;
+    ok = validerChamp("satisfaction") && ok;
+    ok = validerChamp("commentaire")  && ok;
+    ok = validerChamp("rgpd")         && ok;
+
+    if (!ok) {
+        // Faire défiler vers la première erreur visible
+        var premiere = document.querySelector(".error-msg.show");
+        if (premiere) premiere.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+    }
+
+    // Tout est valide → afficher le message de succès
+    document.getElementById("formCard").style.display  = "none";
+    document.getElementById("progressBar").style.width = "100%";
+    document.getElementById("successBox").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+</script>
+
+
+
+</body>
+</html>
